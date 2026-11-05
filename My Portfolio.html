@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vignesh — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f5f8;--surf:#fff;--ink:#0d1b2a;--mut:#53657a;--acc:#0a7d6e;--acc2:#b45309;--line:#d3dae1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#060b12;--surf:#0e1722;--ink:#e6edf3;--mut:#8b9bb0;--acc:#2ee6c5;--acc2:#ffb454;--line:#1d2c3e}}
+:root[data-theme="dark"]{--bg:#060b12;--surf:#0e1722;--ink:#e6edf3;--mut:#8b9bb0;--acc:#2ee6c5;--acc2:#ffb454;--line:#1d2c3e}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:16px/1.65 'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+background:radial-gradient(60vw 50vh at 85% 8%,color-mix(in srgb,var(--acc) 16%,transparent),transparent),radial-gradient(55vw 50vh at 5% 95%,color-mix(in srgb,#7c5cff 18%,transparent),transparent),var(--bg);background-attachment:fixed}
+h1,h2,h3{font-family:'Space Grotesk',system-ui,sans-serif;margin:0}
+a{color:inherit;text-decoration:none}
+#net{position:fixed;inset:0;width:100%;height:100%;z-index:-2;pointer-events:none}
+#bg{position:fixed;right:-120px;bottom:-120px;width:420px;opacity:.12;z-index:-1;pointer-events:none}
+/* full-screen gear intro */
+#field{position:fixed;inset:0;z-index:10;pointer-events:none;background:radial-gradient(circle at 50% 50%,#0b1623,#03060a);overflow:hidden}
+#gears{position:absolute;inset:0;width:100%;height:100%;will-change:transform}
+.spin{animation:rot var(--d) linear infinite}
+.rev{animation-direction:reverse}
+@keyframes rot{to{transform:rotate(360deg)}}
+.hero{position:relative;z-index:11;min-height:100vh;display:grid;place-items:center;text-align:center;padding:30px 6vw;color:#e6edf3}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 60% 48% at 50% 50%,rgba(3,6,10,.85),rgba(3,6,10,.4) 62%,transparent 82%)}
+.tag{color:#2ee6c5;font-size:14px}
+.hero h1{font-size:clamp(2.6rem,8vw,5.6rem);line-height:1.02;margin:14px 0;background:linear-gradient(90deg,#fff 30%,#2ee6c5);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:#9fb0c4;max-width:52ch;margin:0 auto}
+.cur{display:inline-block;width:9px;height:1.1em;background:#2ee6c5;vertical-align:-3px;margin-left:4px;animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.hero .btns{justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--line);background:var(--surf);border-radius:6px;font-size:14px;transition:.2s}
+.btn:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-2px);box-shadow:0 0 18px color-mix(in srgb,var(--acc) 30%,transparent)}
+.btn svg{width:18px;height:18px;fill:currentColor}
+.hero .btn{background:rgba(10,18,28,.8);color:#e6edf3;border-color:#2a3b50}
+.hero .btn:hover{color:#2ee6c5;border-color:#2ee6c5}
+.scroll{position:absolute;bottom:22px;left:0;right:0;font-size:12px;color:#8b9bb0;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;justify-content:space-between;align-items:center;padding:12px 6vw;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);opacity:0;pointer-events:none}
+nav b{color:var(--acc);font-size:15px}
+nav div{display:flex;gap:18px;font-size:13px;overflow-x:auto}
+nav a:hover{color:var(--acc)}
+section.s{padding:80px 6vw;max-width:1100px;margin:0 auto}
+.h{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.h span{color:var(--acc);font-size:14px}
+.h h2{font-size:clamp(1.5rem,3.5vw,2.2rem)}
+.h::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--acc),transparent)}
+.card,.term{background:color-mix(in srgb,var(--surf) 80%,transparent);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:8px}
+.card{padding:20px;transition:.25s;display:block}
+.card:hover{border-color:var(--acc);transform:translateY(-3px);box-shadow:0 8px 30px color-mix(in srgb,var(--acc) 14%,transparent)}
+.term{overflow:hidden}
+.term i{display:block;padding:8px 14px;border-bottom:1px solid var(--line);font-size:12px;color:var(--mut);font-style:normal}
+.term div{padding:18px;color:var(--mut)}
+.term b{color:var(--acc2);font-weight:600}
+.ok{color:var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.tl{border-left:2px solid var(--line);padding-left:22px;display:grid;gap:18px}
+.tl .card{position:relative}
+.tl .card::before{content:"";position:absolute;left:-30px;top:24px;width:12px;height:12px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc)}
+.card small{color:var(--acc);font-size:12px}
+.card h3{font-size:1.15rem;margin:4px 0 6px}
+.card p{margin:0;color:var(--mut);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chips em{font-style:normal;font-size:11px;padding:2px 8px;border:1px solid var(--line);border-radius:20px;color:var(--mut)}
+footer{text-align:center;padding:50px 6vw 70px;color:var(--mut);font-size:13px}
+footer .btns{justify-content:center}
+.ex{display:flex;flex-wrap:wrap;gap:10px}
+.ex span{padding:8px 14px;border:1px solid var(--line);border-radius:6px;font-size:13px;background:color-mix(in srgb,var(--surf) 80%,transparent);backdrop-filter:blur(6px);transition:.2s}
+.ex span::before{content:"✓ ";color:var(--acc)}
+.ex span:hover{border-color:var(--acc);transform:translateY(-2px)}
+.ex em{font-style:normal;color:var(--acc2);margin-left:6px}
+.js .r{opacity:0;transform:translateY(24px);transition:.7s}
+.js .r.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.spin,.scroll,.cur{animation:none}}
+</style>
+</head>
+<body>
+<div id="field"><svg id="gears" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-label="Interlocking rotating gears"></svg></div>
+<canvas id="net"></canvas>
+<svg id="bg" viewBox="-100 -100 200 200"></svg>
+
+<nav><b>&lt;Vignesh /&gt;</b><div><a href="#about">about</a><a href="#positions">positions</a><a href="#projects">projects</a><a href="#exams">exams</a><a href="#contact">contact</a></div></nav>
+
+<header class="hero">
+  <div>
+    <div class="tag">&gt; initializing mechanisms<span class="cur"></span></div>
+    <h1>Amutha vel<br>Vignesh V</h1>
+    <p>Production Engineering × Data Science — mechanisms, models and machines.</p>
+    <div class="btns" id="heroBtns"></div>
+  </div>
+  <a class="scroll" href="#about">scroll to engage the gears ↓</a>
+</header>
+
+<section class="s" id="about">
+  <div class="h r"><span>01 /</span><h2>About Myself</h2></div>
+  <div class="term r"><i>● ● ● &nbsp; about.sh</i>
+  <div>
+    <b>$</b> whoami<br>Vignesh — a dual-degree student building at the edge of hardware and software.<br><br>
+    <b>$</b> cat education.txt<br>
+    B.Tech, Production Engineering — NIT Calicut (2025–2029)<br>
+    BS, Data Science &amp; Applications — IIT Madras (2025–2029)<br><br>
+    <b>$</b> cat interests.txt<br>AI/ML · Satellite systems · Web development · Open source<span class="cur" style="background:var(--acc)"></span>
+  </div></div>
+</section>
+
+<section class="s" id="positions">
+  <div class="h r"><span>02 /</span><h2>Positions Maintained</h2></div>
+  <div class="tl">
+    <div class="card r"><small>2025 – present</small><h3>Member, S-Cell (Startup Cell) — NITC</h3><p>Working on startup and entrepreneurship ideas on campus.</p></div>
+    <div class="card r"><small>2026</small><h3>Contributor &amp; Campus Ambassador — GSSoC ’26</h3><p>Open-source contributor and ambassador for GirlScript Summer of Code.</p></div>
+    <div class="card r"><small>2026</small><h3>Backend Contributor — ECSOC ’26</h3><p>Backend work with MongoDB, FastAPI, Redis and JWT authentication.</p></div>
+    <div class="card r"><small>2026</small><h3>Summer Intern — BASE</h3><p>45-day Summer Internship at Bharat Space Education Research Centre; built SentinelSat as the capstone.</p></div>
+    <div class="card r"><small>Remote</small><h3>Intern — BSERC</h3><p>Remote internship in aircraft, drones and robotics.</p></div>
+  </div>
+</section>
+
+<section class="s" id="projects">
+  <div class="h r"><span>03 /</span><h2>Projects</h2></div>
+  <div class="grid">
+    <a class="card r" href="https://github.com/vgamush-user/Sentinel_Satellite_AI_Detection_System" target="_blank" rel="noopener">
+      <small>SATELLITE · CYBERSECURITY · AI</small><h3>SentinelSat AI Detection</h3>
+      <p>Onboard anomaly and cyberattack detection for CubeSat telemetry, with a confidence-gated autonomy system and human review for uncertain cases. 86% model compression with no accuracy loss.</p>
+      <div class="chips"><em>CrewAI</em><em>XGBoost</em><em>PyTorch</em><em>SHAP</em><em>ChromaDB</em><em>Gradio</em></div></a>
+    <div class="card r"><small>WEB · FULL-STACK</small><h3>Examination Management Portal V2</h3>
+      <p>MAD-II course project at IIT Madras for managing exams end to end.</p></div>
+    <div class="card r"><small>WEB · FLASK</small><h3>PlacementHub</h3>
+      <p>Multi-role campus placement portal (Admin, Company, Student) with 28 Flask routes and session-based auth.</p>
+      <div class="chips"><em>Flask</em><em>SQLite</em><em>Bootstrap 5</em></div></div>
+    <div class="card r"><small>MACHINE LEARNING</small><h3>Age-Group Classifier</h3>
+      <p>Summer Analytics 2026 (IIT Guwahati): clinically motivated feature engineering and a soft-voting ensemble.</p></div>
+    <div class="card r"><small>MECHANISMS</small><h3>Peaucellier Writing Machine</h3>
+      <p>Hand-manufactured writing machine in a 30×30×30 envelope, modelled in SolidWorks.</p></div>
+    <div class="card r"><small>OPEN SOURCE</small><h3>GSSoC ’26 Contributions</h3>
+      <p>Math Calculator and Physics Formula Display for Smartly Labs AI; fixes to UltimateHealth’s React Native app.</p></div>
+  </div>
+</section>
+
+<section class="s" id="exams">
+  <div class="h r"><span>04 /</span><h2>Entrance Exams</h2></div>
+  <div class="ex r">
+    <span>AEEE<em>Rank 689</em></span><span>VITEEE<em>Rank 3,066</em></span><span>JEE Main<em>97.81 %ile · Rank 33,533</em></span><span>BITSAT<em>207/390</em></span>
+  </div>
+  <p class="r" style="color:var(--mut);font-size:13px;margin:16px 0 0">Also qualified: JEE Advanced, IAT</p>
+</section>
+
+<footer id="contact">
+  <div class="h" style="justify-content:center"><span>05 /</span><h2>Let’s connect</h2></div>
+  <div class="btns" id="footBtns"></div>
+  <p>© 2026 Amutha vel Vignesh V · built with gears &amp; code</p>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+// ---- edit these links ----
+var LINKS=[
+ {n:'GitHub',u:'https://github.com/vgamush-user',p:'M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.300.7-1.600-2.600-.3-5.300-1.300-5.300-5.700 0-1.300.5-2.300 1.200-3.100-.1-.3-.5-1.500.1-3.100 0 0 1-.3 3.200 1.200a11 11 0 0 1 5.800 0c2.200-1.500 3.200-1.200 3.200-1.200.6 1.600.2 2.800.1 3.100.7.8 1.200 1.800 1.200 3.100 0 4.400-2.700 5.400-5.300 5.700.4.4.8 1.100.8 2.200v3.200c0 .3.2.7.8.6A11.500 11.500 0 0 0 12 .5z'},
+ {n:'LinkedIn',u:'https://linkedin.com/in/amuthavel-vignesh-v-346a34371',p:'M4.980 3.500a2.500 2.500 0 1 1 0 5 2.500 2.500 0 0 1 0-5zM3 9.500h4V21H3zM9.500 9.500h3.800v1.600h.1c.5-1 1.800-1.900 3.700-1.900 4 0 4.700 2.600 4.700 6V21h-4v-5c0-1.200 0-2.800-1.700-2.800s-2 1.300-2 2.700V21h-4z'},
+ {n:'Twitter',u:'https://twitter.com/YOUR_HANDLE',p:'M18.200 2.200h3.300l-7.200 8.300 8.500 11.300h-6.700l-5.200-6.800-6 6.800H1.600l7.700-8.800L1.200 2.200H8l4.700 6.200zm-1.200 17.600h1.800L7 4.100H5z'},
+ {n:'Mail',u:'mailto:your.email@example.com',p:'M2 5h20a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.500 2v.4l8.500 5.600 8.500-5.600V7zm17 10V10l-8.500 5.600L3.500 10v7z'}
+];
+function btns(id){var h='';LINKS.forEach(function(l){h+='<a class="btn" href="'+l.u+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="'+l.p+'"/></svg>'+l.n+'</a>'});document.getElementById(id).innerHTML=h}
+btns('heroBtns');btns('footBtns');
+
+
+// ---- realistic gear generator (true involute teeth, metal shading) ----
+var NS='http://www.w3.org/2000/svg',GID=0,PA=20*Math.PI/180,
+PAL={steel:['#f1f5f8','#b3bfca','#76828e','#3a434d'],brass:['#fbe8b8','#dcb15a','#a07a2b','#5a4214']};
+function q(v){return Math.round(v*10)/10}
+function inv(a){return Math.tan(a)-a}
+function circ(cx,cy,r){return 'M'+(cx-r)+' '+cy+'a'+r+' '+r+' 0 1 0 '+2*r+' 0a'+r+' '+r+' 0 1 0 '+(-2*r)+' 0Z'}
+function toothPath(n,m){
+ var pr=m*n/2,rb=pr*Math.cos(PA),rr=pr-1.25*m,ro=pr+m,p=2*Math.PI/n,S=7,d='',
+ half=function(r){return p/4+inv(PA)-inv(Math.acos(rb/Math.max(r,rb)))-0.012},
+ f=function(r,a){return q(r*Math.cos(a))+' '+q(r*Math.sin(a))},R=q(rr)+' '+q(rr)+' 0 0 1 ';
+ for(var i=0;i<n;i++){var c=i*p,pts=[],k,r;
+  for(k=0;k<=S;k++){r=rr+(ro-rr)*k/S;pts.push([r,c-half(r)])}
+  for(k=S;k>=0;k--){r=rr+(ro-rr)*k/S;pts.push([r,c+half(r)])}
+  for(k=0;k<pts.length;k++)d+=(i===0&&k===0?'M':k===0?'A'+R:'L')+f(pts[k][0],pts[k][1])+' '}
+ return d+'A'+R+f(rr,-half(rr))+'Z'}
+function gear(n,m,x,y,metal,rev,offRad,shadow){
+ var id='g'+(++GID),P=PAL[metal],pr=m*n/2,rr=pr-1.25*m,ro=pr+m,rw=rr*.84,hr=pr*.22,
+ k=n>=20?6:n>=14?5:4,hole=(rw-hr)*.3,hc=(hr+rw)/2,fr=rr/ro,holes='',rims='',i,a,hx,hy;
+ for(i=0;i<k;i++){a=(i+.5)*2*Math.PI/k;hx=q(hc*Math.cos(a));hy=q(hc*Math.sin(a));
+  holes+=circ(hx,hy,q(hole));
+  rims+='<circle cx="'+hx+'" cy="'+hy+'" r="'+q(hole)+'" fill="none" stroke="'+P[3]+'" stroke-width="2.4"/><circle cx="'+hx+'" cy="'+hy+'" r="'+q(hole-2)+'" fill="none" stroke="'+P[0]+'" stroke-opacity=".45"/>'}
+ var s=document.createElementNS(NS,'g');s.setAttribute('transform','translate('+q(x)+' '+q(y)+')');
+ 
+ function st(o,c){return '<stop offset="'+o+'" stop-color="'+c+'"/>'}
+ s.innerHTML='<defs><radialGradient id="'+id+'a">'+st(0,P[2])+st(q(fr*.78*100)/100,P[0])+st(q(fr*100)/100,P[1])+st(1,P[2])+'</radialGradient>'+
+ '<radialGradient id="'+id+'b">'+st(0,P[1])+st(.8,P[2])+st(1,P[3])+'</radialGradient>'+
+ '<radialGradient id="'+id+'h" cx=".4" cy=".35">'+st(0,P[0])+st(.6,P[1])+st(1,P[3])+'</radialGradient></defs>'+
+ '<g transform="rotate('+q(offRad*180/Math.PI)+')"><g class="spin'+(rev?' rev':'')+'" style="--d:'+(n*.6)+'s">'+
+ '<path fill-rule="evenodd" d="'+toothPath(n,m)+holes+'" fill="url(#'+id+'a)" stroke="'+P[3]+'" stroke-width="1.2" stroke-linejoin="round"/>'+
+ '<path fill-rule="evenodd" d="'+circ(0,0,q(rw))+holes+'" fill="url(#'+id+'b)" stroke="'+P[3]+'" stroke-width="1.5"/>'+
+ '<circle r="'+q(rw+1.8)+'" fill="none" stroke="'+P[0]+'" stroke-opacity=".6"/>'+rims+
+ '<circle r="'+q(hr)+'" fill="url(#'+id+'h)" stroke="'+P[3]+'" stroke-width="1.5"/>'+
+ '<circle r="'+q(hr*.42)+'" fill="#12171c"/><rect x="'+q(-hr*.1)+'" y="'+q(-hr*.64)+'" width="'+q(hr*.2)+'" height="'+q(hr*.3)+'" fill="#12171c"/>'+
+ '<circle cy="'+q(hr*.74)+'" r="'+q(hr*.13)+'" fill="'+P[3]+'"/></g></g>';
+ if(shadow)s.insertAdjacentHTML('afterbegin','<circle cx="'+q(ro*.06)+'" cy="'+q(ro*.1)+'" r="'+q(ro*1.04)+'" fill="url(#soft)"/>');
+ // static light/shade arcs on the rim so lighting stays fixed while the gear turns
+ var rm=(rw+rr)/2,wd=q((rr-rw)*.5),pt=function(g){var t=g*Math.PI/180;return q(rm*Math.cos(t))+' '+q(rm*Math.sin(t))};
+ s.insertAdjacentHTML('beforeend','<path d="M'+pt(195)+'A'+q(rm)+' '+q(rm)+' 0 0 1 '+pt(265)+'" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="'+wd+'" stroke-linecap="round"/>'+
+ '<path d="M'+pt(15)+'A'+q(rm)+' '+q(rm)+' 0 0 1 '+pt(85)+'" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="'+wd+'" stroke-linecap="round"/>');
+ return s}
+// phase so child's gap faces parent's tooth (and vice-versa) -> teeth truly mesh
+function meshOff(po,pn,ang,cn){var pp=2*Math.PI/pn,pc=2*Math.PI/cn,ph=(((ang-po)/pp)%1+1)%1,pc2=((.5-ph)%1+1)%1;return ang+Math.PI-pc2*pc}
+
+
+// ---- full-screen meshed gear field ----
+var svg=document.getElementById('gears'),M=14;
+svg.innerHTML='<defs><radialGradient id="soft"><stop offset=".72" stop-color="#000" stop-opacity=".55"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>';
+// [teeth, parent index, angle° from parent, metal]
+var SPEC=[[36,null,0,'steel'],[20,0,180,'brass'],[20,0,0,'brass'],[14,0,-90,'brass'],[14,0,90,'brass'],[28,1,180,'steel'],[28,2,0,'steel']],G=[];
+SPEC.forEach(function(s,i){var n=s[0],o;
+ if(s[1]===null)o={x:800,y:450,off:0,rev:false,n:n};
+ else{var P=G[s[1]],a=s[2]*Math.PI/180,d=M*(n+P.n)/2;
+  o={x:P.x+d*Math.cos(a),y:P.y+d*Math.sin(a),off:meshOff(P.off,P.n,a,n),rev:!P.rev,n:n}}
+ G.push(o);svg.appendChild(gear(n,M,o.x,o.y,s[3],o.rev,o.off,true))});
+var anims=svg.getAnimations?svg.getAnimations({subtree:true}):[];
+
+// ---- scroll-driven gear for the portfolio (kept) ----
+var bg=document.getElementById('bg'),g=gear(18,9,0,0,'steel',false,0,false);bg.appendChild(g);
+var inner=g.querySelector('.spin');inner.classList.remove('spin');inner.style.transformOrigin='0 0';
+
+// ---- intro -> portfolio transition ----
+var field=document.getElementById('field'),hero=document.querySelector('.hero'),nav=document.querySelector('nav');
+function onScroll(){
+ var p=Math.min(1,Math.max(0,scrollY/(innerHeight*.85)));
+ field.style.opacity=1-p;field.style.visibility=p>=1?'hidden':'visible';
+ svg.style.transform='scale('+(1+p*.9)+')';
+ hero.style.opacity=Math.max(0,1-p*1.5);hero.style.pointerEvents=p>.6?'none':'auto';
+ nav.style.opacity=p;nav.style.pointerEvents=p<.5?'none':'auto';
+ anims.forEach(function(a){a.playbackRate=1+p*6});
+ inner.style.transform='rotate('+(scrollY*0.25)+'deg)'}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+// ---- tech network background ----
+(function(){var c=document.getElementById('net'),x=c.getContext('2d'),W,H,P=[],mx=-999,my=-999,i;
+ function size(){W=c.width=innerWidth;H=c.height=innerHeight;P=[];var N=Math.min(90,Math.round(W*H/20000));
+  for(i=0;i<N;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4})}
+ function draw(){x.clearRect(0,0,W,H);var col=getComputedStyle(document.documentElement).getPropertyValue('--acc').trim()||'#2ee6c5',j,a,b,d;
+  x.fillStyle=x.strokeStyle=col;
+  for(i=0;i<P.length;i++){a=P[i];a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
+   x.globalAlpha=.7;x.beginPath();x.arc(a.x,a.y,1.6,0,6.3);x.fill();
+   for(j=i+1;j<P.length;j++){b=P[j];d=Math.hypot(a.x-b.x,a.y-b.y);
+    if(d<140){x.globalAlpha=(1-d/140)*.35;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}
+   d=Math.hypot(a.x-mx,a.y-my);if(d<170){x.globalAlpha=(1-d/170)*.6;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(mx,my);x.stroke()}}
+  x.globalAlpha=1;if(!matchMedia('(prefers-reduced-motion:reduce)').matches)requestAnimationFrame(draw)}
+ addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});addEventListener('resize',size);
+ try{size();draw()}catch(e){}})();
+
+// ---- reveal on scroll ----
+try{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.r').forEach(function(el){io.observe(el)})}catch(e){document.querySelectorAll('.r').forEach(function(el){el.classList.add('on')})}
+</script>
+</body>
+</html>
